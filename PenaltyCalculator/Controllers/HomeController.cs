@@ -85,7 +85,7 @@ namespace PenaltyCalculator.Controllers
             var country = await context.Countries.FirstOrDefaultAsync(n => n.Id == SelectedCountryId);
             if (calculatedBussinessDays>10)
             {
-                return calculatedBussinessDays - 10 * country.DailyAmount + " " + country.CurrencyType;
+                return (calculatedBussinessDays - 10) * country.DailyAmount + " " + country.CurrencyType;
             }
             else
             {
