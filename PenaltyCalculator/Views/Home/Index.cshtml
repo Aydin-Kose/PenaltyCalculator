@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model PenaltyCalculator.Models.ViewModel.PenaltyCalculatorViewModel
+<form method="post" asp-action="Calculate">
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Calculate Penalty</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Book.CheckOutDate"></label>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Book.ReturnDate"></label>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Country.Id"></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input asp-for="Book.CheckOutDate" class="form-control" />
+                        <span asp-validation-for="Book.CheckOutDate" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="Book.ReturnDate" class="form-control" />
+                        <span asp-validation-for="Book.ReturnDate" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <select asp-for="Country.Id" asp-items="@Model.CountriesDropDown" class="form-control">
+                            <option selected>--Select Expense Type--</option>
+                        </select>
+                        <span asp-validation-for="Country.Id" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-2 row">
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-75" value="Calculate" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+@if (Model.Book.CalculatedBussinessDays!=null)
+{
+    <div class="border p-3" style="margin-top:20px">
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Calculated Penalty</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <label asp-for="Book.CalculatedBussinessDays"></label>
+                    </div>
+                    <div class="col-6">
+                        <label asp-for="Book.CalculatedPenalty"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <input asp-for="Book.CalculatedBussinessDays" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="Book.CalculatedPenalty" class="form-control" />
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-8 offset-2 row">
+                        <div class="col">
+                            <input type="button" class="btn btn-info w-75" value="Clean" onclick="location.href='@Url.Action("Index", "Home")'" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
