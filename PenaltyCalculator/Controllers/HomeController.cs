@@ -83,11 +83,14 @@ namespace PenaltyCalculator.Controllers
         private async Task<string> CalculatePenaltyAmountAsync(int calculatedBussinessDays, int SelectedCountryId)
         {
             var country = await context.Countries.FirstOrDefaultAsync(n => n.Id == SelectedCountryId);
-            if (calculatedBussinessDays<10)
+            if (calculatedBussinessDays>10)
+            {
+                return calculatedBussinessDays - 10 * country.DailyAmount + " " + country.CurrencyType;
+            }
+            else
             {
                 return "No Penalty";
             }
-            return calculatedBussinessDays * country.DailyAmount + " " + country.CurrencyType;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
